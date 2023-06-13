@@ -47,8 +47,8 @@ class TransferController extends Controller
         $transfer->value = $request['value'];
         $transfer->operation_id = 2;
         $transfer->save();
-         
-        
+
+
         return 'تم التحويل ' ;
         return redirect('/transfers');
     }

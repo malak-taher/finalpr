@@ -13,8 +13,8 @@ class usercontroller extends Controller
         return view('user', compact('users'));
     }
 
-   
-    
+
+
     public function add() {
         return view('register');
     }
@@ -51,6 +51,7 @@ class usercontroller extends Controller
 
     public function delete($id) {
 
+        return $id;
     }
 
 

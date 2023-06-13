@@ -11,10 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('userrequests', function (Blueprint $table) {
+        Schema::create('notifications', function (Blueprint $table) {
             $table->id();
+            $table->String('content');
             $table->integer('account_id');
-            $table->string('requests');
             $table->timestamps();
         });
     }
@@ -24,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('uerrequests');
+        Schema::dropIfExists('notifications');
     }
 };

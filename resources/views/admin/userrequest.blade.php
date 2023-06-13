@@ -26,8 +26,24 @@
                         <td>>{{$userrequest->choose}}</td>
                           <td>
 
-                            <a class="btn btn-danger" href="{{url('/userrequest-acceptance/'.$userrequest->id)}}">قبول</a>
-                            <a class="btn btn-danger" href="{{url('/userrequest-delete/'.$userrequest->id)}}">رفض</a>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <form action="{{ route('userrequests.acceptance', ['id' => $userrequest->id]) }}" method="POST">
+                                        @csrf
+                                        <button type="submit" class="btn btn-success">قبول</button>
+                                    </form>
+                                </div>
+                                <div class="col-md-6">
+                                    <a class="btn btn-danger" href="{{route('userrequests.destroy', $userrequest->id)}}" onclick="event.preventDefault(); document.getElementById('delete-form-{{$userrequest->id}}').submit();">
+                                        رفض
+                                    </a>
+                                    <form id="delete-form-{{$userrequest->id}}" action="{{route('userrequests.destroy', $userrequest->id)}}" method="POST" style="display: none;">
+                                        @csrf
+                                        @method('DELETE')
+                                    </form>
+                                </div>
+                            </div>
                         </tr></td>
                   @endforeach
                 </tbody>

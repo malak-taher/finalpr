@@ -12,6 +12,10 @@ use App\Http\Controllers\openaccountController;
 use App\Http\Controllers\testcontroller;
 
 
+Route::get('/search-records', 'statementaccountController@searchForm')->name('search-form');
+Route::post('/search-records', [StatementAccountController::class, 'searchRecords'])->name('search-records');
+
+
 Route::get('/entering', [enteringcontroller::class, 'index']);
 Route::get('/login', [UserController::class, 'login']);
 Route::post('/login', [UserController::class, 'check']);
@@ -24,6 +28,9 @@ Route::post('/print', [accountController::class, 'print']);
 
 Route::get('/entering', [enteringcontroller::class, 'index']);
 Route::post('/entering', [enteringcontroller::class, 'login']);
+Route::resource('userrequests', UserRequestController::class);
+
+Route::post('/userrequests/{id}/acceptance', [UserRequestController::class, 'acceptance'])->name('userrequests.acceptance');
 
 Route::get('/statementaccount', [statementaccountcontroller::class, 'index']);
 Route::post('/statementaccount', [statementaccountcontroller::class, 'index']);
@@ -31,8 +38,10 @@ Route::post('/statementaccount', [statementaccountcontroller::class, 'index']);
 
 Route::get('/home', [homecontroller::class, 'index']);
 Route::post('/home', [homecontroller::class, 'index']);
-Route::get('/userrequest', [homecontroller::class, 'userrequest']);
-Route::post('/userrequest', [homecontroller::class, 'userrequest']);
+
+//Route::get('/userrequest', [homecontroller::class, 'userrequest']);
+//Route::post('/userrequest', [homecontroller::class, 'userrequest']);
+
 
 
 Route::get('/user', [UserController::class, 'index']);
@@ -57,10 +66,8 @@ Route::get('/transfer', [TransferController::class, 'index']);
 Route::get('/transfer-add', [TransferController::class, 'add']);
 Route::post('/transfer-add', [TransferController::class, 'store']);
 
-Route::get('/userrequests', [userrequestController::class, 'index']);
-Route::get('/userrequest', [userrequestController::class, 'add']);
-Route::post('/userrequest', [userrequestController::class, 'store']);
-Route::get('/userrequest-delete/{id}', [userrequestController::class, 'delete']);
+
+
 
 
 Route::get('/openaccount', [openaccountController::class, 'index']);

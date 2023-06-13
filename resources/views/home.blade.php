@@ -4,6 +4,9 @@
 
 <div class="container mt-5">
     <div class="card">
+        <div style="text-align: center; color: {{ $lastNotificationContent == 'لا يوجد إشعارات' ? 'red' : 'green' }};">
+            آخر إشعار: {{ $lastNotificationContent }}
+        </div>
         <div class="card-body">
             <form action="{{url('/home')}}" method="post">
                 @csrf
@@ -12,7 +15,7 @@
 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
     الاستفسار على الحساب
   </button>
-  
+
   <!-- Modal -->
   <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -22,11 +25,11 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          {{session()->get('info')->balans}}
+         0
         </div>
         <div class="modal-footer">
           <button type="butary" data-bs-dismiss="modal">اغلاق</button>
-         
+
         </div>
       </div>
     </div>
@@ -34,8 +37,8 @@
 
 
 
-  
-            
+
+
                 <a class="btn btn-primary" href="statementaccount">كشف حساب</a>
 
 
@@ -45,7 +48,7 @@
 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal2">
    طلب دفتر صكوك
   </button>
-  
+
   <!--  aa Modal -->
   <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -55,9 +58,16 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <form action="{{url('/admin.userrequest')}}" method="post">
-              <button class="btn btn-primary">طلب دفتر صكوك</button>
-          </form>
+            <form method="POST" action="/userrequests">
+                @csrf
+                <!-- استخدام الحقول الخاصة بنموذج إضافة عنصر جديد -->
+                <button hidden type="submit">إضافة</button>
+            </form>
+            <form method="POST" action="/userrequests">
+                @csrf
+
+                <button type="submit" class="btn btn-primary">ارسال طلب دفتر صكوك</button>
+            </form>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">اغلاق</button>
